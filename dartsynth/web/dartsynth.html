@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dartsynth</title>
+    
+    <script async type="application/dart" src="dartsynth.dart"></script>
+    <script async src="packages/browser/dart.js"></script>
+    
+    <link rel="stylesheet" href="dartsynth.css">
+  </head>
+  <body>
+    <input type="range" id="slider" min=0 max=100/>
+    <div id="text"></div>
+    <canvas id="drawbar" width=200 height=200></canvas>
+  </body>
+</html>
