@@ -1,6 +1,4 @@
-import 'dart:html';
-import 'dart:async';
-import 'dart:math';
+part of dsyn_gui;
 
 class Knob {
   CanvasElement _canvas;
@@ -14,7 +12,6 @@ class Knob {
   
   String _color = "black";
   String _grayColor = "darkgray";
-  String _bgcolor = "white";
 
   StreamController _changeController = new StreamController();
   
@@ -43,21 +40,31 @@ class Knob {
              value = maxValue;
            }
          }
+  String get color => _color;
+         set color(String v) {
+           _color = v;
+           draw();
+         }
+  String get color2 => _grayColor;
+         set color2(String v) {
+           _grayColor = v;
+           draw();
+         }
    
   Stream<double> get onChange => _changeController.stream;
          
   
   void draw() {
     CanvasRenderingContext2D ctx = _canvas.getContext("2d");
-    num r = min(_canvas.width, _canvas.height) / 2 - 5;
-    num c_x = _canvas.width / 2;
-    num c_y =  _canvas.height/ 2;
+    num w = _canvas.clientWidth;
+    num h = _canvas.clientHeight;
+    num r = min(w, h) / 2 - 5;
+    num c_x = w / 2;
+    num c_y =  w/ 2;
     num angle = (_value - _minValue) / (_maxValue - _minValue) * 1.5 * PI + 0.75 * PI;
 
-    ctx.fillStyle = _bgcolor;
-    ctx.fillRect(0, 0, _canvas.width, _canvas.height);
-    
-    ctx.lineWidth = 3;
+    ctx.clearRect(0, 0, w, h);
+    ctx.lineWidth = r ~/ 20;
     ctx.strokeStyle = _color;
     ctx.beginPath();
     ctx.arc(c_x, c_y, r, 0.75 * PI, angle);
@@ -68,10 +75,6 @@ class Knob {
     ctx.beginPath();
     ctx.arc(c_x, c_y, r, 2.25 * PI, angle, true);
     ctx.stroke();
-    
-    
-    ctx.fillStyle = _color;
-    
   }
   
   List<StreamSubscription<MouseEvent>> _subscriptions = [];
