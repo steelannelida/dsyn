@@ -1,8 +1,10 @@
 import 'dart:html';
-import '../gui/dsyn_gui.dart';
+import 'gui/dsyn_gui.dart';
 
 
 void main() {
+
+  
   InputArrow inputTop = new InputArrow(querySelector("#inputtop"));
   inputTop.direction = 'down';
   InputArrow inputLeft = new InputArrow(querySelector("#inputleft"));
